@@ -1,0 +1,25 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Next.js
+kobo-site/.next/
+kobo-site/out/
+
+# Vercel
+.vercel
+
+# Ambiente
+.env*
+
+# Playwright / validação
+kobo-site/scripts/.flora-progress.json
+kobo-site/scripts/validation/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build info
+*.tsbuildinfo
+kobo-site/next-env.d.ts

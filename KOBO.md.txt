@@ -1,0 +1,152 @@
+# KOBO — Especificação de Marca e Site
+
+> Documento-fonte para regenerar o sistema de marca Kobo (relatório, mockups e site) dentro do Claude Code ou qualquer agente com acesso a ferramentas de arquivo e geração de imagem.
+
+---
+
+## 1. Essência
+
+- **Nome:** Kobo (工房, *kōbō* — atelier / oficina em japonês)
+- **Tagline:** Móveis que brincam
+- **Categoria:** Mobiliário infantil contemporâneo
+- **Origem:** Brasil
+- **Posicionamento:** Atelier brasileiro de mobiliário infantil em MDF, com encaixes à vista, bordas roliças e estética silenciosa. Peças lúdicas sem serem infantilizadas.
+- **Valores:** honestidade material, montagem à vista como ornamento, durabilidade, design contido, segurança, brincar como ato projetual.
+- **Tom de voz:** sóbrio, curto, sensorial, quase japonês. Evita diminutivos e superlativos.
+
+## 2. Tipografia
+
+- **Oficial única:** Maven Pro (Google Fonts)
+- **Pesos:** 400 / 500 / 700 / 800 / 900
+- **Uso:**
+  - Logotipo: Maven Pro **800**, caixa alta, tracking `0.18em`
+  - Títulos: Maven Pro **800** caixa alta, tracking `0.16em`–`0.32em`
+  - Subtítulos / eyebrow: Maven Pro **500** caixa alta, tracking `0.28em`, cor Pedra
+  - Corpo: Maven Pro **400**, caixa baixa
+- **Regra absoluta:** nenhuma fonte serifada, nenhuma fonte de substituição.
+
+## 3. Paleta proprietária
+
+| Nome       | HEX       | Uso                               |
+|------------|-----------|-----------------------------------|
+| Carbono    | `#0F0F0F` | Tinta primária, títulos           |
+| Tinta      | `#1C1C1C` | Texto corpo em fundo claro        |
+| Grafite    | `#3A3A38` | Sinalização, fundos escuros       |
+| Pedra      | `#8A857C` | Eyebrow, metadados                |
+| Cinza Claro| `#B8B3A8` | Linhas, divisores                 |
+| Osso       | `#E9E4D8` | Fundos secundários                |
+| Papel      | `#F4F0E6` | Fundo primário                    |
+| Areia      | `#D6C4A3` | Acento neutro                     |
+| Argila     | `#C8A78A` | Acento quente, embalagens         |
+| Sálvia     | `#A8B09A` | Acento frio, único tom verde      |
+| Umbra      | `#6B5A48` | Tipografia sobre argila/areia     |
+
+Regra: combinar sempre em duplas, baixa saturação, nunca usar mais de 3 cores por peça.
+
+## 4. Logo
+
+- Marca palavra única: **KOBO**
+- Assinatura opcional: ideograma **工房** posicionado como selo discreto (canto ou rodapé)
+- Tagline sob a marca: `MÓVEIS QUE BRINCAM` em Maven Pro 500, tracking `0.28em`
+- Área de respiro mínima: altura do "O" em todos os lados
+- Proibições: gradientes, sombras, contornos, rotação, distorção, cores fora da paleta
+
+## 5. Entregáveis
+
+### 5.1 Relatório de marca (.docx + .pdf)
+- 13 páginas, formato Carta
+- Seções: capa / sumário / essência / identidade / paleta / tipografia & logo / tendências / análise competitiva / princípios de produto / roadmap
+- Gerado via `docx-js` → LibreOffice headless → PDF
+- Fonte Maven Pro instalada no sistema antes do render
+
+### 5.2 Sistema de aplicações (HTML único)
+Arquivo `Kobo_Brand_System.html` contendo:
+
+1. Sistema de logo em 8 fundos da paleta
+2. Três cartões de visita (papel / tinta / argila)
+3. Três ecobags (cru / sálvia / tinta)
+4. Pasta institucional + envelope
+5. Mochila com patch, camiseta, caneca
+6. Duas estampas modulares sobre tecido
+7. Quatro selos adesivos circulares
+8. Sinalização de vitrine em painel grafite
+9. Grade editorial de 6 posts Instagram
+10. Paleta proprietária completa
+
+### 5.3 Site institucional (Next.js + Tailwind)
+
+```
+kobo-site/
+├── app/
+│   ├── layout.tsx          # importa Maven Pro via next/font/google
+│   ├── page.tsx            # home: hero KOBO + manifesto
+│   ├── colecao/page.tsx    # grade de produtos
+│   ├── atelier/page.tsx    # sobre + processo
+│   └── contato/page.tsx
+├── components/
+│   ├── Logo.tsx
+│   ├── ProductCard.tsx
+│   └── Nav.tsx
+├── public/
+│   └── images/             # imagens geradas (Flora AI / Midjourney / SDXL)
+└── tailwind.config.ts      # cores Kobo como tokens
+```
+
+Tokens Tailwind:
+```ts
+colors: {
+  carbono:'#0F0F0F', tinta:'#1C1C1C', grafite:'#3A3A38',
+  pedra:'#8A857C', cinzaClaro:'#B8B3A8', osso:'#E9E4D8',
+  papel:'#F4F0E6', areia:'#D6C4A3', argila:'#C8A78A',
+  salvia:'#A8B09A', umbra:'#6B5A48'
+}
+```
+
+Componentes-chave: `<Hero>` com `KOBO` em Maven Pro 900 no fundo Papel; `<Manifesto>` com tagline; `<Grid>` de produtos em 3 colunas; `<Footer>` com ideograma 工房.
+
+## 6. Prompts para geração de imagem
+
+Use com Flora AI, Midjourney, SDXL, DALL·E ou qualquer gerador:
+
+1. **Hero — atelier:**
+   *"Minimal Brazilian children's furniture atelier, warm neutral palette, cream walls, raw MDF shelves with visible allen-key joints, soft morning light, rounded organic shapes, muted sage and clay accents, editorial photography, Kinfolk style, 35mm, shallow depth of field"*
+
+2. **Produto — estante nuvem:**
+   *"Cloud-shaped children's bookshelf in raw MDF with rounded edges, visible star-head screws as design feature, matte finish, standing on bone-white seamless background, studio light, soft shadow, product photography, minimal"*
+
+3. **Produto — banco pebble:**
+   *"Small pebble-shaped children's stool in sage-green painted MDF, smooth rounded form, visible allen joints on side, on paper background, top-angled studio shot, minimal editorial"*
+
+4. **Lifestyle — criança brincando:**
+   *"Child aged 4 playing with wooden modular toy on MDF low table in a bright minimal scandinavian-japanese nursery, neutral terracotta and sage palette, natural linen curtains, no branding, candid editorial"*
+
+5. **Textura — MDF cru:**
+   *"Extreme close-up of raw MDF surface with rounded edge and a single visible star-head screw, warm directional light, macro texture, neutral tones"*
+
+6. **Packaging flat-lay:**
+   *"Flat lay of a children's furniture kit: kraft clay-colored cardboard box, bone-white instruction booklet, small allen key, cotton tag with KOBO wordmark, neutral paper background, overhead editorial photography"*
+
+## 7. Respondendo à pergunta: Claude Code + Flora AI
+
+O Claude Code **não** tem integração direta e nativa com o Flora AI hoje. O que é possível:
+
+- **Via MCP (Model Context Protocol):** se existir um servidor MCP para o Flora, basta adicionar ao `~/.claude.json` ou rodar `claude mcp add`. Até a data deste documento não há um MCP oficial publicado pelo Flora — vale checar em `https://flora.new` e no registro de MCPs.
+- **Via API HTTP:** se o Flora expuser API REST/GraphQL, o Claude Code pode chamá-la diretamente com `curl`/`fetch` dentro de um script Node/Python que você peça para ele rodar. Você fornece a chave de API como variável de ambiente.
+- **Via navegador (Claude in Chrome / Playwright MCP):** o agente pode abrir `flora.new`, fazer login **você mesmo**, colar o prompt e baixar a imagem. Funciona mas é frágil.
+- **Alternativas com API pública estável e já prontas:** Replicate (SDXL, Flux), fal.ai, OpenAI Images, Stability AI, Ideogram. Qualquer uma dessas é chamável direto por `curl` no Claude Code sem MCP.
+
+Recomendação prática: peça ao Claude Code para gerar as imagens via **Replicate + Flux** (custo baixo, sem login manual, resultado editorial excelente) usando os prompts da seção 6, salvar em `public/images/` e referenciar no site Next.js.
+
+## 8. Ordem de execução sugerida
+
+1. Gerar/confirmar `Kobo_Relatorio_de_Marca.pdf` (já existe em `mnt/outputs/`)
+2. Gerar `Kobo_Brand_System.html` (já existe)
+3. Rodar `npx create-next-app@latest kobo-site --ts --tailwind --app`
+4. Aplicar tokens de cor e importar Maven Pro em `app/layout.tsx`
+5. Gerar imagens via API de imagem escolhida → `public/images/`
+6. Montar Home, Coleção, Atelier, Contato
+7. Deploy em Vercel
+
+---
+
+*Documento vivo — Kobo · Sistema visual v02 · 2026 · 工房*

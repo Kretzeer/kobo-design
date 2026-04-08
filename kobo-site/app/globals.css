@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Fonte */
+  --font-sans: var(--font-maven);
+
+  /* Paleta Kobo */
+  --color-carbono:    #0F0F0F;
+  --color-tinta:      #1C1C1C;
+  --color-grafite:    #3A3A38;
+  --color-pedra:      #8A857C;
+  --color-cinza-claro:#B8B3A8;
+  --color-osso:       #E9E4D8;
+  --color-papel:      #F4F0E6;
+  --color-areia:      #D6C4A3;
+  --color-argila:     #C8A78A;
+  --color-salvia:     #A8B09A;
+  --color-umbra:      #6B5A48;
+}
+
+html {
+  background: var(--color-papel);
+  color: var(--color-tinta);
+  font-family: var(--font-sans), sans-serif;
+}

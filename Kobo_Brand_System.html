@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kobo — Sistema de Marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ─── Reset + Base ─────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --carbono:    #0F0F0F;
+    --tinta:      #1C1C1C;
+    --grafite:    #3A3A38;
+    --pedra:      #8A857C;
+    --cinza-claro:#B8B3A8;
+    --osso:       #E9E4D8;
+    --papel:      #F4F0E6;
+    --areia:      #D6C4A3;
+    --argila:     #C8A78A;
+    --salvia:     #A8B09A;
+    --umbra:      #6B5A48;
+    --f: 'Maven Pro', sans-serif;
+  }
+  body { font-family: var(--f); background: var(--grafite); color: var(--papel); }
+
+  /* ─── Layout ────────────────────────────────────────────────────── */
+  .section { padding: 80px 60px; border-bottom: 1px solid var(--carbono); }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--pedra); margin-bottom: 48px;
+  }
+  .section-title {
+    font-size: 28px; font-weight: 800; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--papel); margin-bottom: 40px;
+  }
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* ─── Capa ──────────────────────────────────────────────────────── */
+  #capa {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    background: var(--carbono); padding: 80px;
+  }
+  #capa .brand {
+    font-size: clamp(72px, 12vw, 144px); font-weight: 900;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--papel); line-height: 1;
+  }
+  #capa .tagline {
+    font-size: 14px; font-weight: 500; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--pedra); margin-top: 20px;
+  }
+  #capa .doc-meta {
+    position: absolute; bottom: 80px; right: 80px;
+    font-size: 11px; font-weight: 400; color: var(--pedra);
+    text-align: right; letter-spacing: 0.1em;
+  }
+
+  /* ─── 1. Sistema de Logo ────────────────────────────────────────── */
+  #logo { background: var(--tinta); }
+  .logo-bg {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    height: 160px; border-radius: 4px;
+    position: relative; overflow: hidden;
+  }
+  .logo-bg .wordmark {
+    font-size: 42px; font-weight: 800; letter-spacing: 0.18em;
+    text-transform: uppercase; line-height: 1;
+  }
+  .logo-bg .sub {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.28em;
+    text-transform: uppercase; margin-top: 8px;
+  }
+  .logo-bg .bg-name {
+    position: absolute; bottom: 10px; right: 12px;
+    font-size: 9px; font-weight: 400; letter-spacing: 0.14em; opacity: 0.5;
+  }
+
+  /* ─── 2. Cartões de visita ──────────────────────────────────────── */
+  #cartoes { background: var(--grafite); }
+  .card-scene { perspective: 1000px; height: 200px; }
+  .card-inner {
+    position: relative; width: 100%; height: 100%;
+    transform-style: preserve-3d; transition: transform 0.7s ease;
+  }
+  .card-scene:hover .card-inner { transform: rotateY(180deg); }
+  .card-face {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden; border-radius: 3px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 24px;
+  }
+  .card-back { transform: rotateY(180deg); }
+  .card-face .c-name { font-size: 13px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+  .card-face .c-role { font-size: 10px; font-weight: 400; letter-spacing: 0.1em; margin-top: 4px; opacity: 0.7; }
+  .card-face .c-brand { font-size: 24px; font-weight: 900; letter-spacing: 0.18em; text-transform: uppercase; }
+  .card-face .c-contacts { font-size: 9px; font-weight: 400; line-height: 1.8; opacity: 0.8; letter-spacing: 0.06em; }
+  .card-back .c-brand-back { font-size: 36px; font-weight: 900; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.12; }
+  .card-back .c-tagline-back { font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.6; }
+
+  /* ─── 3. Ecobags ────────────────────────────────────────────────── */
+  #ecobags { background: var(--osso); }
+  #ecobags .section-title { color: var(--tinta); }
+  #ecobags .section-label { color: var(--pedra); }
+  .ecobag-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .ecobag-label { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pedra); }
+
+  /* ─── 4. Papelaria ──────────────────────────────────────────────── */
+  #papelaria { background: var(--carbono); }
+
+  /* ─── 5. Merchandise ────────────────────────────────────────────── */
+  #merchandise { background: var(--tinta); }
+
+  /* ─── 6. Estampas ───────────────────────────────────────────────── */
+  #estampas { background: var(--grafite); }
+
+  /* ─── 7. Selos ──────────────────────────────────────────────────── */
+  #selos { background: var(--osso); }
+  #selos .section-title { color: var(--tinta); }
+  #selos .section-label { color: var(--pedra); }
+
+  /* ─── 8. Sinalização ────────────────────────────────────────────── */
+  #sinalizacao { background: var(--carbono); }
+
+  /* ─── 9. Instagram ──────────────────────────────────────────────── */
+  #instagram { background: var(--tinta); }
+  .post { aspect-ratio: 1; border-radius: 3px; overflow: hidden; position: relative; }
+  .post-content {
+    position: absolute; inset: 0; display: flex;
+    flex-direction: column; padding: 20px;
+  }
+  .post-eyebrow { font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; }
+  .post-title { font-size: 18px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-top: auto; line-height: 1.2; }
+  .post-body { font-size: 10px; font-weight: 400; line-height: 1.6; margin-top: 8px; opacity: 0.8; }
+
+  /* ─── 10. Paleta ────────────────────────────────────────────────── */
+  #paleta { background: var(--papel); }
+  #paleta .section-title { color: var(--tinta); }
+  #paleta .section-label { color: var(--pedra); }
+  .swatch { border-radius: 4px; overflow: hidden; }
+  .swatch-color { height: 96px; }
+  .swatch-info { padding: 12px 14px; background: var(--osso); }
+  .swatch-name { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tinta); }
+  .swatch-hex { font-size: 11px; font-weight: 400; color: var(--pedra); margin-top: 2px; letter-spacing: 0.06em; }
+  .swatch-uso { font-size: 10px; font-weight: 400; color: var(--pedra); margin-top: 4px; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ CAPA ═══════════════════════════════ -->
+<section id="capa">
+  <p class="section-label" style="color:var(--pedra);letter-spacing:0.28em;font-size:11px;font-weight:500;text-transform:uppercase;font-family:var(--f)">Sistema de Marca</p>
+  <h1 class="brand">KOBO</h1>
+  <p class="tagline">MÓVEIS QUE BRINCAM</p>
+  <div class="doc-meta">Sistema Visual v02 · 2026 · Kobo</div>
+</section>
+
+<!-- ═════════════════════ 1. SISTEMA DE LOGO ═══════════════════════════ -->
+<section class="section" id="logo">
+  <p class="section-label">01 — Identidade</p>
+  <h2 class="section-title">Sistema de Logo</h2>
+  <div class="grid grid-4" style="gap:16px">
+
+    <!-- Papel (claro) -->
+    <div class="logo-bg" style="background:var(--papel)">
+      <span class="wordmark" style="color:var(--carbono)">KOBO</span>
+      <span class="sub" style="color:var(--pedra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--pedra)">Papel</span>
+    </div>
+
+    <!-- Osso -->
+    <div class="logo-bg" style="background:var(--osso)">
+      <span class="wordmark" style="color:var(--carbono)">KOBO</span>
+      <span class="sub" style="color:var(--pedra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--pedra)">Osso</span>
+    </div>
+
+    <!-- Areia -->
+    <div class="logo-bg" style="background:var(--areia)">
+      <span class="wordmark" style="color:var(--tinta)">KOBO</span>
+      <span class="sub" style="color:var(--umbra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--umbra)">Areia</span>
+    </div>
+
+    <!-- Argila -->
+    <div class="logo-bg" style="background:var(--argila)">
+      <span class="wordmark" style="color:var(--tinta)">KOBO</span>
+      <span class="sub" style="color:var(--umbra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--umbra)">Argila</span>
+    </div>
+
+    <!-- Sálvia -->
+    <div class="logo-bg" style="background:var(--salvia)">
+      <span class="wordmark" style="color:var(--tinta)">KOBO</span>
+      <span class="sub" style="color:var(--umbra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--umbra)">Sálvia</span>
+    </div>
+
+    <!-- Grafite -->
+    <div class="logo-bg" style="background:var(--grafite)">
+      <span class="wordmark" style="color:var(--papel)">KOBO</span>
+      <span class="sub" style="color:var(--pedra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--pedra)">Grafite</span>
+    </div>
+
+    <!-- Tinta -->
+    <div class="logo-bg" style="background:var(--tinta)">
+      <span class="wordmark" style="color:var(--papel)">KOBO</span>
+      <span class="sub" style="color:var(--pedra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--pedra)">Tinta</span>
+    </div>
+
+    <!-- Carbono -->
+    <div class="logo-bg" style="background:var(--carbono)">
+      <span class="wordmark" style="color:var(--papel)">KOBO</span>
+      <span class="sub" style="color:var(--pedra)">MÓVEIS QUE BRINCAM</span>
+      <span class="bg-name" style="color:var(--pedra)">Carbono</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ 2. CARTÕES DE VISITA ═══════════════════════ -->
+<section class="section" id="cartoes">
+  <p class="section-label">02 — Papelaria</p>
+  <h2 class="section-title">Cartões de Visita</h2>
+  <p style="font-size:11px;color:var(--pedra);margin-bottom:32px;letter-spacing:0.08em">Passe o cursor sobre o cartão para ver o verso.</p>
+  <div class="grid grid-3" style="gap:32px">
+
+    <!-- Papel -->
+    <div>
+      <div class="card-scene">
+        <div class="card-inner">
+          <div class="card-face" style="background:var(--papel)">
+            <div>
+              <p class="c-name" style="color:var(--carbono)">Ana Lima</p>
+              <p class="c-role" style="color:var(--pedra)">Design de Produto</p>
+            </div>
+            <div>
+              <p class="c-brand" style="color:var(--carbono)">KOBO</p>
+              <p class="c-contacts" style="color:var(--tinta)">ana@kobo.com.br<br>@kobomobiario<br>São Paulo — SP</p>
+            </div>
+          </div>
+          <div class="card-face card-back" style="background:var(--papel)">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%">
+              <p class="c-brand-back" style="color:var(--carbono)">KOBO</p>
+            </div>
+            <p class="c-tagline-back" style="position:absolute;bottom:24px;left:24px;color:var(--pedra)">MÓVEIS QUE BRINCAM</p>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:10px;color:var(--pedra);text-align:center;margin-top:12px;letter-spacing:0.1em">PAPEL</p>
+    </div>
+
+    <!-- Tinta -->
+    <div>
+      <div class="card-scene">
+        <div class="card-inner">
+          <div class="card-face" style="background:var(--tinta)">
+            <div>
+              <p class="c-name" style="color:var(--papel)">Pedro Costa</p>
+              <p class="c-role" style="color:var(--pedra)">Atelier & Produção</p>
+            </div>
+            <div>
+              <p class="c-brand" style="color:var(--papel)">KOBO</p>
+              <p class="c-contacts" style="color:var(--cinza-claro)">pedro@kobo.com.br<br>@kobomobiario<br>São Paulo — SP</p>
+            </div>
+          </div>
+          <div class="card-face card-back" style="background:var(--tinta)">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%">
+              <p class="c-brand-back" style="color:var(--papel)">KOBO</p>
+            </div>
+            <p class="c-tagline-back" style="position:absolute;bottom:24px;left:24px;color:var(--pedra)">MÓVEIS QUE BRINCAM</p>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:10px;color:var(--pedra);text-align:center;margin-top:12px;letter-spacing:0.1em">TINTA</p>
+    </div>
+
+    <!-- Argila -->
+    <div>
+      <div class="card-scene">
+        <div class="card-inner">
+          <div class="card-face" style="background:var(--argila)">
+            <div>
+              <p class="c-name" style="color:var(--tinta)">Julia Matos</p>
+              <p class="c-role" style="color:var(--umbra)">Comercial & Projetos</p>
+            </div>
+            <div>
+              <p class="c-brand" style="color:var(--tinta)">KOBO</p>
+              <p class="c-contacts" style="color:var(--umbra)">julia@kobo.com.br<br>@kobomobiario<br>São Paulo — SP</p>
+            </div>
+          </div>
+          <div class="card-face card-back" style="background:var(--argila)">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%">
+              <p class="c-brand-back" style="color:var(--tinta)">KOBO</p>
+            </div>
+            <p class="c-tagline-back" style="position:absolute;bottom:24px;left:24px;color:var(--umbra)">MÓVEIS QUE BRINCAM</p>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:10px;color:var(--pedra);text-align:center;margin-top:12px;letter-spacing:0.1em">ARGILA</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════ 3. ECOBAGS ════════════════════════════ -->
+<section class="section" id="ecobags">
+  <p class="section-label">03 — Embalagem</p>
+  <h2 class="section-title">Ecobags</h2>
+  <div class="grid grid-3" style="gap:40px">
+
+    <!-- Cru/Osso -->
+    <div class="ecobag-wrap">
+      <svg viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px">
+        <!-- Alças -->
+        <path d="M90 80 Q90 40 110 40 Q130 40 130 60" stroke="#B8B3A8" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M170 80 Q170 40 150 40 Q130 40 130 60" stroke="#B8B3A8" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- Corpo -->
+        <rect x="40" y="78" width="180" height="220" rx="8" fill="#E9E4D8"/>
+        <!-- Marcação lateral -->
+        <line x1="40" y1="120" x2="220" y2="120" stroke="#B8B3A8" stroke-width="1" opacity="0.4"/>
+        <!-- Logo -->
+        <text x="130" y="195" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="28" letter-spacing="7" fill="#0F0F0F">KOBO</text>
+        <text x="130" y="215" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="500" font-size="8" letter-spacing="3.5" fill="#8A857C">MÓVEIS QUE BRINCAM</text>
+        <!-- Costura decorativa -->
+        <rect x="52" y="90" width="156" height="196" rx="5" fill="none" stroke="#B8B3A8" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+      </svg>
+      <p class="ecobag-label">Cru — Osso</p>
+    </div>
+
+    <!-- Sálvia -->
+    <div class="ecobag-wrap">
+      <svg viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px">
+        <path d="M90 80 Q90 40 110 40 Q130 40 130 60" stroke="#8A857C" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M170 80 Q170 40 150 40 Q130 40 130 60" stroke="#8A857C" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <rect x="40" y="78" width="180" height="220" rx="8" fill="#A8B09A"/>
+        <line x1="40" y1="120" x2="220" y2="120" stroke="#8A857C" stroke-width="1" opacity="0.4"/>
+        <text x="130" y="195" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="28" letter-spacing="7" fill="#1C1C1C">KOBO</text>
+        <text x="130" y="215" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="500" font-size="8" letter-spacing="3.5" fill="#3A3A38">MÓVEIS QUE BRINCAM</text>
+        <rect x="52" y="90" width="156" height="196" rx="5" fill="none" stroke="#8A857C" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+      </svg>
+      <p class="ecobag-label">Sálvia</p>
+    </div>
+
+    <!-- Tinta/Carbono -->
+    <div class="ecobag-wrap">
+      <svg viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px">
+        <path d="M90 80 Q90 40 110 40 Q130 40 130 60" stroke="#3A3A38" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M170 80 Q170 40 150 40 Q130 40 130 60" stroke="#3A3A38" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <rect x="40" y="78" width="180" height="220" rx="8" fill="#1C1C1C"/>
+        <line x1="40" y1="120" x2="220" y2="120" stroke="#3A3A38" stroke-width="1" opacity="0.4"/>
+        <text x="130" y="195" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="28" letter-spacing="7" fill="#F4F0E6">KOBO</text>
+        <text x="130" y="215" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="500" font-size="8" letter-spacing="3.5" fill="#8A857C">MÓVEIS QUE BRINCAM</text>
+        <rect x="52" y="90" width="156" height="196" rx="5" fill="none" stroke="#3A3A38" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+      </svg>
+      <p class="ecobag-label" style="color:var(--carbono)">Tinta</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ 4. PAPELARIA INSTITUCIONAL ═════════════════════ -->
+<section class="section" id="papelaria">
+  <p class="section-label">04 — Papelaria</p>
+  <h2 class="section-title">Pasta + Envelope</h2>
+  <div class="grid grid-2" style="gap:48px; align-items:center">
+
+    <!-- Pasta A4 Isométrica -->
+    <div>
+      <p style="font-size:11px;color:var(--pedra);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px">Pasta A4</p>
+      <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <!-- Tampa superior (perspectiva isométrica) -->
+        <polygon points="40,80 200,20 360,80 200,140" fill="#D6C4A3"/>
+        <polygon points="40,80 200,140 200,240 40,180" fill="#B8B3A8"/>
+        <polygon points="200,140 360,80 360,180 200,240" fill="#C8A78A"/>
+        <!-- Logo na frente da pasta -->
+        <text x="280" y="145" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="18" letter-spacing="4" fill="#6B5A48" transform="skewY(-15) translate(0,30)">KOBO</text>
+        <!-- Anel (argola simulada) -->
+        <ellipse cx="200" cy="140" rx="10" ry="4" fill="#8A857C"/>
+        <!-- Lombo -->
+        <rect x="193" y="140" width="14" height="100" fill="#8A857C" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- Envelope -->
+    <div>
+      <p style="font-size:11px;color:var(--pedra);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px">Envelope C5</p>
+      <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <!-- Corpo do envelope -->
+        <rect x="20" y="60" width="360" height="200" rx="4" fill="#E9E4D8"/>
+        <!-- Aba superior aberta -->
+        <path d="M20,60 L200,20 L380,60 Z" fill="#D6C4A3"/>
+        <path d="M20,60 L380,60" stroke="#B8B3A8" stroke-width="1"/>
+        <!-- Dobras diagonais -->
+        <line x1="20" y1="60" x2="200" y2="160" stroke="#B8B3A8" stroke-width="1" opacity="0.5"/>
+        <line x1="380" y1="60" x2="200" y2="160" stroke="#B8B3A8" stroke-width="1" opacity="0.5"/>
+        <!-- Logo centralizado -->
+        <text x="200" y="192" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="22" letter-spacing="6" fill="#0F0F0F">KOBO</text>
+        <!-- Endereço de retorno (canto sup esq) -->
+        <text x="36" y="88" font-family="'Maven Pro',sans-serif" font-weight="400" font-size="9" fill="#8A857C" letter-spacing="1">kobo.com.br</text>
+        <!-- Lacre decorativo -->
+        <circle cx="200" cy="260" r="12" fill="#C8A78A"/>
+        <text x="200" y="264" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="900" font-size="9" fill="#1C1C1C" letter-spacing="1">K</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════ 5. MERCHANDISE ══════════════════════════════ -->
+<section class="section" id="merchandise">
+  <p class="section-label">05 — Merchandise</p>
+  <h2 class="section-title">Mochila · Camiseta · Caneca</h2>
+  <div class="grid grid-3" style="gap:40px; align-items:end">
+
+    <!-- Mochila com patch -->
+    <div style="text-align:center">
+      <svg viewBox="0 0 240 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px">
+        <!-- Corpo -->
+        <rect x="30" y="60" width="180" height="220" rx="30" fill="#3A3A38"/>
+        <!-- Frente pocket -->
+        <rect x="50" y="160" width="140" height="100" rx="16" fill="#1C1C1C"/>
+        <!-- Zíper frente -->
+        <path d="M50,180 Q120,170 190,180" stroke="#8A857C" stroke-width="2" fill="none"/>
+        <!-- Alças -->
+        <path d="M75,60 Q60,20 80,20 Q100,20 100,60" stroke="#1C1C1C" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M165,60 Q180,20 160,20 Q140,20 140,60" stroke="#1C1C1C" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <!-- Patch com logo -->
+        <rect x="70" y="80" width="100" height="60" rx="6" fill="#D6C4A3"/>
+        <text x="120" y="116" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="16" letter-spacing="4" fill="#1C1C1C">KOBO</text>
+        <text x="120" y="128" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="500" font-size="6" letter-spacing="2" fill="#8A857C">MÓVEIS QUE BRINCAM</text>
+        <!-- Puxador do zíper -->
+        <circle cx="190" cy="60" r="8" fill="#8A857C"/>
+        <line x1="190" y1="68" x2="190" y2="85" stroke="#8A857C" stroke-width="2"/>
+      </svg>
+      <p style="font-size:11px;color:var(--pedra);letter-spacing:0.14em;text-transform:uppercase;margin-top:12px">Mochila com Patch</p>
+    </div>
+
+    <!-- Camiseta -->
+    <div style="text-align:center">
+      <svg viewBox="0 0 260 280" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px">
+        <!-- Corpo -->
+        <path d="M70,40 L30,90 L70,100 L70,260 L190,260 L190,100 L230,90 L190,40 Q180,30 170,30 Q160,50 130,55 Q100,50 90,30 Q80,30 70,40 Z" fill="#F4F0E6"/>
+        <!-- Costura lateral -->
+        <line x1="70" y1="100" x2="70" y2="260" stroke="#B8B3A8" stroke-width="1" opacity="0.5"/>
+        <line x1="190" y1="100" x2="190" y2="260" stroke="#B8B3A8" stroke-width="1" opacity="0.5"/>
+        <!-- Logo peito -->
+        <text x="130" y="155" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="20" letter-spacing="5" fill="#0F0F0F">KOBO</text>
+        <text x="130" y="170" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="500" font-size="7" letter-spacing="2.5" fill="#8A857C">MÓVEIS QUE BRINCAM</text>
+        <!-- Gola -->
+        <path d="M100,44 Q130,60 160,44" stroke="#B8B3A8" stroke-width="2" fill="none"/>
+      </svg>
+      <p style="font-size:11px;color:var(--pedra);letter-spacing:0.14em;text-transform:uppercase;margin-top:12px">Camiseta Papel</p>
+    </div>
+
+    <!-- Caneca -->
+    <div style="text-align:center">
+      <svg viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px">
+        <!-- Corpo da caneca -->
+        <path d="M50,60 L50,220 Q50,240 70,240 L170,240 Q190,240 190,220 L190,60 Z" fill="#E9E4D8"/>
+        <!-- Elipse superior (abertura) -->
+        <ellipse cx="120" cy="60" rx="70" ry="16" fill="#D6C4A3"/>
+        <!-- Asa -->
+        <path d="M190,100 Q230,100 230,150 Q230,200 190,200" stroke="#D6C4A3" stroke-width="16" fill="none" stroke-linecap="round"/>
+        <!-- Logo -->
+        <text x="120" y="162" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="800" font-size="22" letter-spacing="5" fill="#1C1C1C">KOBO</text>
+        <text x="120" y="178" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="500" font-size="7" letter-spacing="2.5" fill="#8A857C">MÓVEIS QUE BRINCAM</text>
+        <!-- Linha de sombra interna (perspectiva) -->
+        <ellipse cx="120" cy="60" rx="58" ry="11" fill="#C8A78A" opacity="0.3"/>
+      </svg>
+      <p style="font-size:11px;color:var(--pedra);letter-spacing:0.14em;text-transform:uppercase;margin-top:12px">Caneca Osso</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════ 6. ESTAMPAS MODULARES ═══════════════════════ -->
+<section class="section" id="estampas">
+  <p class="section-label">06 — Padrões</p>
+  <h2 class="section-title">Estampas Modulares</h2>
+  <div class="grid grid-2" style="gap:32px">
+
+    <!-- Estampa 1: encaixes em grid -->
+    <div>
+      <p style="font-size:11px;color:var(--pedra);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px">Padrão Encaixe</p>
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:4px">
+        <rect width="400" height="300" fill="#D6C4A3"/>
+        <defs>
+          <pattern id="encaixe" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+            <!-- Cruz/encaixe -->
+            <rect x="22" y="10" width="16" height="40" rx="2" fill="#C8A78A" opacity="0.7"/>
+            <rect x="10" y="22" width="40" height="16" rx="2" fill="#C8A78A" opacity="0.7"/>
+            <!-- Parafuso central -->
+            <circle cx="30" cy="30" r="4" fill="#6B5A48" opacity="0.9"/>
+            <line x1="28" y1="30" x2="32" y2="30" stroke="#D6C4A3" stroke-width="1.5"/>
+            <line x1="30" y1="28" x2="30" y2="32" stroke="#D6C4A3" stroke-width="1.5"/>
+          </pattern>
+        </defs>
+        <rect width="400" height="300" fill="url(#encaixe)"/>
+      </svg>
+    </div>
+
+    <!-- Estampa 2: formas orgânicas -->
+    <div>
+      <p style="font-size:11px;color:var(--pedra);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px">Padrão Pebble</p>
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:4px">
+        <rect width="400" height="300" fill="#A8B09A"/>
+        <defs>
+          <pattern id="pebble" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+            <ellipse cx="20" cy="20" rx="14" ry="10" fill="#8A857C" opacity="0.5" transform="rotate(-20 20 20)"/>
+            <ellipse cx="55" cy="50" rx="18" ry="12" fill="#B8B3A8" opacity="0.4" transform="rotate(15 55 50)"/>
+            <ellipse cx="65" cy="15" rx="10" ry="7" fill="#6B5A48" opacity="0.3" transform="rotate(30 65 15)"/>
+            <ellipse cx="30" cy="65" rx="12" ry="8" fill="#8A857C" opacity="0.4" transform="rotate(-10 30 65)"/>
+          </pattern>
+        </defs>
+        <rect width="400" height="300" fill="url(#pebble)"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ 7. SELOS ADESIVOS ════════════════════════════ -->
+<section class="section" id="selos">
+  <p class="section-label">07 — Sinalização</p>
+  <h2 class="section-title">Selos Adesivos</h2>
+  <div style="display:flex; gap:40px; align-items:center; flex-wrap:wrap">
+
+    <!-- Selo 1: Carbono/Papel -->
+    <div style="text-align:center">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:160px">
+        <circle cx="80" cy="80" r="72" fill="#0F0F0F"/>
+        <circle cx="80" cy="80" r="64" fill="none" stroke="#3A3A38" stroke-width="1"/>
+        <text x="80" y="86" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="900" font-size="30" letter-spacing="6" fill="#F4F0E6">KOBO</text>
+      </svg>
+      <p style="font-size:10px;color:var(--pedra);letter-spacing:0.1em;margin-top:8px">Carbono</p>
+    </div>
+
+    <!-- Selo 2: Papel/Carbono -->
+    <div style="text-align:center">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:160px">
+        <circle cx="80" cy="80" r="72" fill="#F4F0E6"/>
+        <circle cx="80" cy="80" r="64" fill="none" stroke="#B8B3A8" stroke-width="1"/>
+        <text x="80" y="86" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="900" font-size="30" letter-spacing="6" fill="#0F0F0F">KOBO</text>
+      </svg>
+      <p style="font-size:10px;color:var(--pedra);letter-spacing:0.1em;margin-top:8px">Papel</p>
+    </div>
+
+    <!-- Selo 3: Argila/Umbra — com tagline em arco -->
+    <div style="text-align:center">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:160px">
+        <circle cx="80" cy="80" r="72" fill="#C8A78A"/>
+        <circle cx="80" cy="80" r="64" fill="none" stroke="#6B5A48" stroke-width="1"/>
+        <text x="80" y="86" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="900" font-size="30" letter-spacing="6" fill="#1C1C1C">KOBO</text>
+        <path id="arc-a" d="M 25,80 A 55,55 0 0 1 135,80" fill="none"/>
+        <text font-family="'Maven Pro',sans-serif" font-weight="500" font-size="8" letter-spacing="3" fill="#6B5A48">
+          <textPath href="#arc-a" startOffset="10%">MÓVEIS QUE BRINCAM</textPath>
+        </text>
+      </svg>
+      <p style="font-size:10px;color:var(--pedra);letter-spacing:0.1em;margin-top:8px">Argila</p>
+    </div>
+
+    <!-- Selo 4: Sálvia/Tinta -->
+    <div style="text-align:center">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:160px">
+        <circle cx="80" cy="80" r="72" fill="#A8B09A"/>
+        <circle cx="80" cy="80" r="64" fill="none" stroke="#3A3A38" stroke-width="1"/>
+        <text x="80" y="86" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="900" font-size="30" letter-spacing="6" fill="#1C1C1C">KOBO</text>
+        <path id="arc-b" d="M 25,80 A 55,55 0 0 1 135,80" fill="none"/>
+        <text font-family="'Maven Pro',sans-serif" font-weight="500" font-size="8" letter-spacing="3" fill="#3A3A38">
+          <textPath href="#arc-b" startOffset="10%">MÓVEIS QUE BRINCAM</textPath>
+        </text>
+      </svg>
+      <p style="font-size:10px;color:var(--pedra);letter-spacing:0.1em;margin-top:8px">Sálvia</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════ 8. SINALIZAÇÃO DE VITRINE ═══════════════════ -->
+<section class="section" id="sinalizacao">
+  <p class="section-label">08 — Sinalização</p>
+  <h2 class="section-title">Painel de Vitrine</h2>
+  <div style="display:flex; justify-content:center; padding: 40px 0">
+    <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:800px;border-radius:6px">
+      <!-- Painel grafite -->
+      <rect width="800" height="300" fill="#3A3A38"/>
+      <!-- Linhas de grid sutil -->
+      <line x1="0" y1="150" x2="800" y2="150" stroke="#0F0F0F" stroke-width="1" opacity="0.3"/>
+      <line x1="400" y1="0" x2="400" y2="300" stroke="#0F0F0F" stroke-width="1" opacity="0.3"/>
+      <!-- Marca principal centralizada -->
+      <text x="400" y="170" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="900" font-size="88" letter-spacing="20" fill="#F4F0E6">KOBO</text>
+      <!-- Tagline abaixo -->
+      <text x="400" y="210" text-anchor="middle" font-family="'Maven Pro',sans-serif" font-weight="500" font-size="12" letter-spacing="6" fill="#8A857C">MÓVEIS QUE BRINCAM</text>
+      <!-- Bordas de respiro -->
+      <rect x="24" y="20" width="752" height="260" fill="none" stroke="#8A857C" stroke-width="0.5" opacity="0.4"/>
+      <!-- Endereço (rodapé esq e dir) -->
+      <text x="40" y="276" font-family="'Maven Pro',sans-serif" font-weight="400" font-size="9" letter-spacing="2" fill="#8A857C" opacity="0.8">São Paulo — SP</text>
+      <text x="760" y="276" text-anchor="end" font-family="'Maven Pro',sans-serif" font-weight="400" font-size="9" letter-spacing="2" fill="#8A857C" opacity="0.8">kobo.com.br</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════ 9. GRADE INSTAGRAM ══════════════════════════ -->
+<section class="section" id="instagram">
+  <p class="section-label">09 — Social</p>
+  <h2 class="section-title">Grade Instagram</h2>
+  <div class="grid grid-3" style="gap:4px;max-width:720px">
+
+    <!-- Post 1: Produto hero -->
+    <div class="post" style="background:var(--papel)">
+      <div class="post-content">
+        <span class="post-eyebrow" style="color:var(--pedra)">Coleção 2026</span>
+        <div>
+          <p class="post-title" style="color:var(--carbono)">ESTANTE<br>NUVEM</p>
+          <p class="post-body" style="color:var(--grafite)">MDF cru, bordas roliças, encaixe à vista.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 2: Textura/Detalhe -->
+    <div class="post" style="background:var(--areia)">
+      <div class="post-content" style="justify-content:center;align-items:center">
+        <svg viewBox="0 0 120 120" style="width:80px;opacity:0.6">
+          <rect x="44" y="10" width="32" height="100" rx="4" fill="#6B5A48"/>
+          <rect x="10" y="44" width="100" height="32" rx="4" fill="#6B5A48"/>
+          <circle cx="60" cy="60" r="10" fill="#C8A78A"/>
+          <line x1="54" y1="60" x2="66" y2="60" stroke="#D6C4A3" stroke-width="3"/>
+          <line x1="60" y1="54" x2="60" y2="66" stroke="#D6C4A3" stroke-width="3"/>
+        </svg>
+        <p style="font-size:8px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--umbra);margin-top:12px;text-align:center">Encaixe à vista</p>
+      </div>
+    </div>
+
+    <!-- Post 3: Lifestyle -->
+    <div class="post" style="background:var(--osso)">
+      <div class="post-content">
+        <span class="post-eyebrow" style="color:var(--pedra)">Brincar</span>
+        <div>
+          <p class="post-title" style="color:var(--carbono)">O BRINCAR<br>COMO<br>PROJETO</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 4: Citação -->
+    <div class="post" style="background:var(--carbono)">
+      <div class="post-content" style="justify-content:center">
+        <p style="font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--papel);line-height:1.4;margin-top:auto">"Peças lúdicas sem serem infantilizadas."</p>
+        <p style="font-size:9px;font-weight:500;letter-spacing:0.2em;color:var(--pedra);margin-top:16px">— KOBO</p>
+      </div>
+    </div>
+
+    <!-- Post 5: Banco Pebble -->
+    <div class="post" style="background:var(--salvia)">
+      <div class="post-content">
+        <span class="post-eyebrow" style="color:var(--tinta)">Produto</span>
+        <div>
+          <p class="post-title" style="color:var(--tinta)">BANCO<br>PEBBLE</p>
+          <p class="post-body" style="color:var(--umbra)">MDF sálvia. Forma pebble. Seguro desde os primeiros passos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 6: Branding -->
+    <div class="post" style="background:var(--grafite)">
+      <div class="post-content" style="justify-content:center;align-items:center">
+        <p style="font-size:48px;font-weight:900;letter-spacing:0.18em;color:var(--papel);text-align:center;line-height:1">KOBO</p>
+        <p style="font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--pedra);margin-top:8px;text-align:center">MÓVEIS QUE BRINCAM</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════ 10. PALETA ════════════════════════════════ -->
+<section class="section" id="paleta">
+  <p class="section-label">10 — Sistema de Cor</p>
+  <h2 class="section-title">Paleta Proprietária</h2>
+  <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:16px">
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0F0F0F"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Carbono</p>
+        <p class="swatch-hex">#0F0F0F</p>
+        <p class="swatch-uso">Tinta primária, títulos</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1C1C1C"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Tinta</p>
+        <p class="swatch-hex">#1C1C1C</p>
+        <p class="swatch-uso">Texto corpo em fundo claro</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#3A3A38"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Grafite</p>
+        <p class="swatch-hex">#3A3A38</p>
+        <p class="swatch-uso">Sinalização, fundos escuros</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#8A857C"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Pedra</p>
+        <p class="swatch-hex">#8A857C</p>
+        <p class="swatch-uso">Eyebrow, metadados</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#B8B3A8"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Cinza Claro</p>
+        <p class="swatch-hex">#B8B3A8</p>
+        <p class="swatch-uso">Linhas, divisores</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#E9E4D8"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Osso</p>
+        <p class="swatch-hex">#E9E4D8</p>
+        <p class="swatch-uso">Fundos secundários</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F4F0E6"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Papel</p>
+        <p class="swatch-hex">#F4F0E6</p>
+        <p class="swatch-uso">Fundo primário</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#D6C4A3"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Areia</p>
+        <p class="swatch-hex">#D6C4A3</p>
+        <p class="swatch-uso">Acento neutro</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#C8A78A"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Argila</p>
+        <p class="swatch-hex">#C8A78A</p>
+        <p class="swatch-uso">Acento quente, embalagens</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#A8B09A"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Sálvia</p>
+        <p class="swatch-hex">#A8B09A</p>
+        <p class="swatch-uso">Acento frio, único verde</p>
+      </div>
+    </div>
+
+    <div class="swatch">
+      <div class="swatch-color" style="background:#6B5A48"></div>
+      <div class="swatch-info">
+        <p class="swatch-name">Umbra</p>
+        <p class="swatch-hex">#6B5A48</p>
+        <p class="swatch-uso">Tipografia sobre argila/areia</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Regra de uso -->
+  <div style="margin-top:48px;padding:32px;background:var(--osso);border-radius:4px">
+    <p style="font-size:11px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--pedra);margin-bottom:12px">Regra de Combinação</p>
+    <p style="font-size:14px;font-weight:400;color:var(--tinta);line-height:1.7">
+      Combinar sempre em duplas. Baixa saturação. Nunca mais de 3 cores por peça.<br>
+      Nenhuma fonte serifada. Nenhuma fonte de substituição.<br>
+      Gradientes, sombras, contornos e rotação são proibidos no logo.
+    </p>
+  </div>
+</section>
+
+<!-- ─── Rodapé ──────────────────────────────────────────────────────── -->
+<footer style="background:var(--carbono);padding:40px 60px;display:flex;justify-content:space-between;align-items:center">
+  <span style="font-size:20px;font-weight:900;letter-spacing:0.18em;color:var(--papel)">KOBO</span>
+  <span style="font-size:11px;font-weight:400;color:var(--pedra);letter-spacing:0.1em">Sistema Visual v02 · 2026</span>
+</footer>
+
+</body>
+</html>
