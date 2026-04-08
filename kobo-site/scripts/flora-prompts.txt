@@ -1,0 +1,121 @@
+KOBO — Prompts para Flora.ai
+Salve cada imagem com o nome exato em public/images/
+============================================================
+
+[1/8] hero-atelier.png
+------------------------------------------------------------
+Proporção:    16:9
+Tamanho:      1920 × 1080 px
+Lente:        35mm
+Abertura:     f/2.8
+Ângulo:       eye level, levemente abaixo do horizonte
+Distância:    wide — ambiente inteiro visível
+Luz:          natural, manhã, janela lateral esquerda
+------------------------------------------------------------
+Minimal Brazilian children's furniture atelier, warm neutral palette, cream walls, raw MDF shelves with visible allen-key joints, soft morning light, rounded organic shapes, muted sage and clay accents, editorial photography, Kinfolk style, 35mm lens, f/2.8, shallow depth of field, natural window light
+
+============================================================
+
+[2/8] produto-estante-nuvem.png
+------------------------------------------------------------
+Proporção:    1:1
+Tamanho:      1200 × 1200 px
+Lente:        85mm
+Abertura:     f/8 (produto nítido do início ao fim)
+Ângulo:       frontal, 5° acima do centro do produto
+Distância:    medium — produto ocupa 70% do frame
+Luz:          estúdio, softbox frontal + fill lateral
+------------------------------------------------------------
+Cloud-shaped children's bookshelf in raw MDF with rounded edges, visible star-head screws as design feature, matte finish, standing on bone-white seamless background, studio softbox light, soft shadow at base, sharp product photography, 85mm lens, f/8, minimal
+
+============================================================
+
+[3/8] produto-banco-pebble.png
+------------------------------------------------------------
+Proporção:    1:1
+Tamanho:      1200 × 1200 px
+Lente:        85mm
+Abertura:     f/8
+Ângulo:       3/4 frontal, 15° acima do produto
+Distância:    medium-close — produto ocupa 65% do frame
+Luz:          estúdio, luz difusa overhead + rim light lateral
+------------------------------------------------------------
+Small pebble-shaped children's stool in sage-green painted MDF, smooth rounded form, visible allen-key joints on side panel, on warm paper-white seamless background, 85mm lens, f/8, studio diffused overhead light with soft rim light, sharp minimal product photography
+
+============================================================
+
+[4/8] lifestyle-crianca.png
+------------------------------------------------------------
+Proporção:    4:3
+Tamanho:      1600 × 1200 px
+Lente:        35mm
+Abertura:     f/2.0
+Ângulo:       eye level da criança (cerca de 60cm do chão), levemente lateral
+Distância:    medium — criança e mesa visíveis com contexto do ambiente
+Luz:          natural, janela difusa lateral, hora dourada manhã
+------------------------------------------------------------
+Child aged 4 playing with wooden modular toy on MDF low table in a bright minimal nursery, neutral terracotta and sage palette, natural linen curtains, soft morning window light, candid editorial photography, 35mm lens, f/2.0, warm shallow depth of field, no branding visible
+
+============================================================
+
+[5/8] textura-mdf.png
+------------------------------------------------------------
+Proporção:    1:1
+Tamanho:      1200 × 1200 px
+Lente:        100mm macro
+Abertura:     f/4 (foco na borda roliça, fundo suave)
+Ângulo:       45° lateral sobre a aresta do MDF
+Distância:    macro — borda ocupa quase todo o frame
+Luz:          luz direcional lateral rasante, 1 fonte, sombra longa
+------------------------------------------------------------
+Extreme macro close-up of raw MDF edge with rounded 4mm radius corner and a single visible star-head screw, warm raking side light creating long shadow that reveals texture, 100mm macro lens, f/4, sharp on edge soft background, neutral warm tones
+
+============================================================
+
+[6/8] packaging-flatlay.png
+------------------------------------------------------------
+Proporção:    4:3
+Tamanho:      1600 × 1200 px
+Lente:        50mm
+Abertura:     f/5.6
+Ângulo:       overhead 90° (diretamente acima)
+Distância:    itens ocupam 80% do frame com respiro nas bordas
+Luz:          luz difusa overhead, sem sombras duras, flat e uniforme
+------------------------------------------------------------
+Flat lay overhead 90 degrees, children's furniture assembly kit: kraft cardboard box in clay color, bone-white folded instruction booklet, small silver allen key, cotton fabric tag with KOBO wordmark in black, all on warm paper-beige background, 50mm lens, f/5.6, diffused studio light, clean editorial flat lay photography
+
+============================================================
+
+[7/8] produto-mesa-baixa.png
+------------------------------------------------------------
+Proporção:    1:1
+Tamanho:      1200 × 1200 px
+Lente:        85mm
+Abertura:     f/8
+Ângulo:       3/4 frontal, 20° acima do centro da mesa
+Distância:    medium — mesa ocupa 75% do frame
+Luz:          estúdio, softbox lateral direita + reflector esquerdo
+------------------------------------------------------------
+Low children's activity table in raw MDF, 28cm height, fully rounded corners with 4mm radius, visible allen-key assembly joints as decorative detail, on warm cream seamless background, 85mm lens, f/8, studio softbox side light with fill reflector, sharp clean product photography
+
+============================================================
+
+[8/8] atelier-detalhe.png
+------------------------------------------------------------
+Proporção:    4:3
+Tamanho:      1600 × 1200 px
+Lente:        100mm macro
+Abertura:     f/2.8 (foco no parafuso, transição suave para o MDF)
+Ângulo:       45° acima, levemente lateral ao encaixe
+Distância:    macro-close — parafuso ocupa 30% do frame
+Luz:          luz de atelier, fonte única direcional quente
+------------------------------------------------------------
+Close-up macro detail of furniture allen-key assembly joint, single star-head screw flush with raw MDF surface, rounded wooden edge transitioning softly out of focus, warm workshop directional light, 100mm macro lens, f/2.8, razor-sharp focus on screw head, editorial macro photography
+
+============================================================
+
+Instruções:
+1. Gere cada imagem com a proporção e tamanho indicados
+2. Baixe e renomeie com o nome exato (ex: hero-atelier.png)
+3. Salve em: kobo-site/public/images/
+4. Depois rode: npm run validate

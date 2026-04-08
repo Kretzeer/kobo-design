@@ -350,10 +350,14 @@ async function main() {
     const outputPath = path.join(OUTPUT_DIR, item.filename);
 
     if (fs.existsSync(outputPath)) {
-      log(`Arquivo já existe, pulando: ${item.filename}`);
-      progress[item.slug] = { done: true, file: outputPath };
-      saveProgress(progress);
-      continue;
+      const size = fs.statSync(outputPath).size;
+      if (size > 10_000) { // ignora placeholders (< 10KB)
+        log(`Arquivo já existe (${Math.round(size / 1024)}KB), pulando: ${item.filename}`);
+        progress[item.slug] = { done: true, file: outputPath };
+        saveProgress(progress);
+        continue;
+      }
+      log(`Placeholder detectado (${size}B), regenerando: ${item.filename}`);
     }
 
     log(`\n>>> Gerando: ${item.slug}`);

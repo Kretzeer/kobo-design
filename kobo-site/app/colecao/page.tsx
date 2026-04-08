@@ -14,7 +14,7 @@ const products = [
     material: "MDF Cru",
     description:
       "Formato nuvem com bordas roliças e encaixes à vista. Parafuso estrela como detalhe de projeto.",
-    imageSrc: "/images/produto-estante-nuvem.png",
+    imageSrc: "/images/produto-estante-nuvem.jpg",
     imageAlt: "Estante Nuvem Kobo em MDF cru",
   },
   {
@@ -22,7 +22,7 @@ const products = [
     material: "MDF Sálvia",
     description:
       "Forma pebble de baixo centro de gravidade. Encaixes allen aparentes na lateral.",
-    imageSrc: "/images/produto-banco-pebble.png",
+    imageSrc: "/images/produto-banco-pebble.jpg",
     imageAlt: "Banco Pebble Kobo em MDF sálvia",
   },
   {
@@ -30,7 +30,7 @@ const products = [
     material: "MDF Cru",
     description:
       "Altura de 28 cm para atividades sentadas no chão. Cantos totalmente arredondados.",
-    imageSrc: "/images/produto-mesa-baixa.png",
+    imageSrc: "/images/produto-mesa-baixa.jpg",
     imageAlt: "Mesa baixa Kobo em MDF cru",
   },
   {
@@ -38,7 +38,7 @@ const products = [
     material: "MDF Areia",
     description:
       "Perfil em arco, montagem em 3 minutos. Carrega até 8 kg por módulo.",
-    imageSrc: "/images/atelier-detalhe.png",
+    imageSrc: "/images/atelier-detalhe.jpg",
     imageAlt: "Prateleira Arco Kobo em MDF areia",
   },
   {
@@ -46,7 +46,7 @@ const products = [
     material: "MDF Cru",
     description:
       "Baú com tampa de encaixe duplo. Interior em papel kraft. Cabe 40 litros.",
-    imageSrc: "/images/packaging-flatlay.png",
+    imageSrc: "/images/packaging-flatlay.jpg",
     imageAlt: "Baú Bloco Kobo em MDF cru",
   },
   {
@@ -54,7 +54,7 @@ const products = [
     material: "MDF Argila",
     description:
       "Cinco ganchos em ramo estilizado. Altura de 90 cm, fixação na parede.",
-    imageSrc: "/images/textura-mdf.png",
+    imageSrc: "/images/textura-mdf.jpg",
     imageAlt: "Cabideiro Ramo Kobo em MDF argila",
   },
 ];

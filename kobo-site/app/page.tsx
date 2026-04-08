@@ -9,7 +9,7 @@ const featuredProducts = [
     material: "MDF Cru",
     description:
       "Formato nuvem com bordas roliças. Encaixes à vista como ornamento.",
-    imageSrc: "/images/produto-estante-nuvem.png",
+    imageSrc: "/images/produto-estante-nuvem.jpg",
     imageAlt: "Estante Nuvem em MDF cru com encaixes à vista",
     href: "/colecao",
   },
@@ -18,7 +18,7 @@ const featuredProducts = [
     material: "MDF Sálvia",
     description:
       "Forma pebble de baixo centro de gravidade. Seguro desde os primeiros passos.",
-    imageSrc: "/images/produto-banco-pebble.png",
+    imageSrc: "/images/produto-banco-pebble.jpg",
     imageAlt: "Banco Pebble em MDF na cor sálvia",
     href: "/colecao",
   },
@@ -26,7 +26,7 @@ const featuredProducts = [
     name: "Mesa Baixa",
     material: "MDF Cru",
     description: "Cantos arredondados, altura ideal para atividades no chão.",
-    imageSrc: "/images/produto-mesa-baixa.png",
+    imageSrc: "/images/produto-mesa-baixa.jpg",
     imageAlt: "Mesa baixa em MDF cru para crianças",
     href: "/colecao",
   },

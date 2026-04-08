@@ -56,7 +56,7 @@ export default function AtelierPage() {
           {/* Imagem do atelier */}
           <div className="relative w-full aspect-[16/7] max-h-[520px]">
             <Image
-              src="/images/hero-atelier.png"
+              src="/images/hero-atelier.jpg"
               alt="Atelier Kobo — prateleiras de MDF com encaixes à vista"
               fill
               className="object-cover"
@@ -118,7 +118,7 @@ export default function AtelierPage() {
         <section className="bg-tinta">
           <div className="relative w-full aspect-[16/6] max-h-[400px]">
             <Image
-              src="/images/atelier-detalhe.png"
+              src="/images/atelier-detalhe.jpg"
               alt="Detalhe de encaixe em MDF — parafuso allen à vista"
               fill
               className="object-cover"
